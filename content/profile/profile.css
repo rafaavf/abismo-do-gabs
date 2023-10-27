@@ -52,10 +52,10 @@ h3{
 .content{
     margin-left:auto;
     margin-right:auto;
-    margin-top: 2vw;
+    margin-top: 25px;
     background-color: black;
     width: 80vw;
-    height: 35vw;
+    height: 450px;
     border: 2px solid white;
     border-radius: 20px;
 }
@@ -73,7 +73,7 @@ h3{
     border: 2px solid white;
     border-radius: 20px;
     width: 300px;
-    height: 25vw;
+    height: 320px;
     /* margin-left: 5vw; */
 }
 .profilePicture{
@@ -111,7 +111,7 @@ h3{
     margin-left: 31.2vw; */
     /* margin-right: 30vw; */
     border-radius: 20px;
-    height: 25vw;
+    height: 320px;
 }
 .dataContent{
     margin-left: 2vw;
@@ -135,7 +135,7 @@ h3{
     border: 2px solid white;
     border-radius:20px;
     width: 300px;
-    height: 25vw;
+    height: 320px;
     /* margin-left: 52vw;
     margin-top: -324px; */
 }

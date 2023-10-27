@@ -19,14 +19,14 @@ const thisUser = getCookie('_userid');
 
 
 if (thisUser == null) {
-    window.location.href = '/login.html';
+    location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
 } else {
     const thisUserDataRef = ref(database, '/users/' + thisUser);
 
     onValue(thisUserDataRef, (snapshot) => {
         const thisUserData = snapshot.val();
         if (thisUserData.hasAcess == null || !thisUserData.hasAcess) {
-            window.location.href = '/login.html';
+            location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
             document.cookie = "_userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;;"
             // document.cookie = "_hasAccessMsg=true";
         } else {
