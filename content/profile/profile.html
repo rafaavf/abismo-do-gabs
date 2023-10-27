@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>abismo do gabs</title>
+    <link rel="stylesheet" href="profile.css" />
+</head>
+
+<body>
+    <script type="module" src="profile.js"></script>
+
+    <div class="cabecalho">
+        <div class="cabecalho-title">
+            <h1 class=>abismo do gabs</h1>
+        </div>
+
+        <div class="cabecalho-links">
+            <div>
+                <a href="../content.html" class="cabecalho-links-text">Home</a>
+            </div>
+
+            <div>
+                <a href="../logout/logout.html" class="cabecalho-links-text">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="perfil">Perfil</h1>
+
+        <div class="contentFlex">
+            <div>
+                <div class="pfp">
+                    <h2 style="margin-left:2vw">Foto de perfil:</h2>
+                    <button class="pfpButton" id="pfpButton">Enviar</button>
+                    <input class='pfpInput' id="pfpUrl" placeholder="Insira a Url da imagem">
+                    <image class="profilePicture" id="pfp"></image>
+
+                    <div class="description">
+                        <h2 style="margin-left:2vw">Descrição</h2>
+
+                        <textarea class="descriptionItems" id="descriptionBox" aria-multiline="true" cols="31"
+                            rows="4"></textarea>
+
+                        <button class="descriptionItems" id="descriptionButton">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data">
+                <div class="dataContent">
+                    <h2>Username:</h2>
+                    <input class='editInput' id="username" />
+                </div>
+
+                <div class="dataContent">
+                    <h2>Email:</h2>
+                    <input class='editInput' id="email" />
+                </div>
+
+                <div class="dataContent">
+                    <h2>Senha*:</h2>
+                    <input class='editInput' id="password" />
+                </div>
+
+                <div class="dataContent">
+                    <button class="sendBtn" id="sendBtn">Enviar</button>
+                </div>
+            </div>
+
+            <div class="information">
+                <h2 class="informationTitle">Informações</h2>
+
+                <div class="informationText">
+                    <div>
+                        <h3>
+                            Para mudar a foto de perfil é necessário uma URL de imagem e que a imagem seja quadrada.
+                            Para conseguir um URL, o mais fácil é mandar a foto no discord, clicar em "Abrir no
+                            navegador"
+                            e copiar o link.
+                        </h3>
+                    </div>
+                    <div>
+                        <h3>
+                            A senha serve para mudar o username e o email. Para mudar sua senha, realize log out e
+                            clique
+                            em "Forgot password?".
+                        </h3>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="informationTitle">Join Date</h2>
+                    <div class="informationText">
+                        <h3 id="joinDate"></h3>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

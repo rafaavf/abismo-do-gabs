@@ -1,0 +1,148 @@
+body{
+    background-image: url('../images/bg.jpg');
+    background-color: black;
+}
+h1{
+    color:white;
+}
+h2{
+    color:white;
+}
+h3{
+    color:white;
+    font-size: small;
+    font-weight: lighter;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1; 
+  }
+::-ms-input-placeholder { 
+    color: white;
+  }
+
+.cabecalho{
+    margin-top: -20px;
+    margin-left:auto;
+    margin-right: auto;
+    background-color: black;
+    height: 100px;
+    width: 80vw;
+    border:2px solid white;
+    border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+}
+.cabecalho-title{
+    text-align: center;
+    color:white;
+}
+.cabecalho-links{
+    display:flex;
+    justify-content: space-evenly;
+}
+.cabecalho-links-text{
+    color:white;
+}
+.perfil{
+    color:white;
+    margin-top: 2vw;
+    margin-left:4vw;
+}
+.content{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 2vw;
+    background-color: black;
+    width: 80vw;
+    height: 35vw;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.contentFlex{
+    margin-left: 5vw;
+    display: inline-flex;
+    /* justify-content: space-between; */
+    row-gap: 10px;
+    /* display: inline-flex;
+    justify-content: space-around; */
+}
+
+
+.pfp{
+    border: 2px solid white;
+    border-radius: 20px;
+    width: 300px;
+    height: 25vw;
+    /* margin-left: 5vw; */
+}
+.profilePicture{
+    margin-top:-80px;
+    height:70px;
+    width: 70px;
+    margin-left:2vw;
+}
+.pfpButton{
+    background-color: black;
+    color:white;
+    border:2px solid white;
+    margin-left: 102px;
+}
+.pfpInput{
+    margin-left: 102px;
+    margin-top: 10px;
+    margin-bottom: -15px;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+.descriptionItems{
+    margin-left:2vw;
+    background-color: black;
+    color:white;
+    border:2px solid white;
+    border-radius: white;
+}
+
+.data{
+    border: 2px solid white;
+    /* margin-top:-324px;
+    margin-left: 31.2vw; */
+    /* margin-right: 30vw; */
+    border-radius: 20px;
+    height: 25vw;
+}
+.dataContent{
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.editInput{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+.sendBtn{
+    background-color: black;
+    color:white;
+    border:2px solid white;
+    margin-top: 4px;
+}
+
+.information{
+    background-color: black;
+    border: 2px solid white;
+    border-radius:20px;
+    width: 300px;
+    height: 25vw;
+    /* margin-left: 52vw;
+    margin-top: -324px; */
+}
+.informationTitle{
+    margin-left:2vw;
+}
+.informationText{
+    margin-left:3vw;
+    margin-right:3vw;
+}

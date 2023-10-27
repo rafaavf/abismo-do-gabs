@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>abismo do gabs</title>
+    </head>
+    
+    <body>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+            import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+            import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    
+            const firebaseConfig = {
+                apiKey: "AIzaSyDpgNLmYYUZF0WleyDSXAb-iyA5VUNgQBo",
+                authDomain: "projeto-586e9.firebaseapp.com",
+                databaseURL: "https://projeto-586e9-default-rtdb.firebaseio.com",
+                projectId: "projeto-586e9",
+                storageBucket: "projeto-586e9.appspot.com",
+                messagingSenderId: "835426278469",
+                appId: "1:835426278469:web:95beaa7ebb4467775d172c"
+            };
+    
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase();
+            const auth = getAuth(app);
+    
+    
+    
+            document.cookie = "_userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;;";
+            window.location.href = '/login.html';
+        </script>
+    </body>
+</html>

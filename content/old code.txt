@@ -1,0 +1,26 @@
+<h1>Welcome to the protected page!</h1>
+<!-- Your protected content goes here -->
+<button id="sign-out">Sign Out</button>
+</div>
+<script>
+// Check if a user is logged in
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is authenticated, show the content
+        document.getElementById('content').style.display = 'block';
+    } else {
+        // User is not authenticated, redirect to the login page
+        window.location.href = '/login.html';
+    }
+});
+
+// Handle sign-out button
+document.getElementById('sign-out').addEventListener('click', function() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful
+        window.location.href = '/login.html'; // Redirect to login page after sign-out
+    }).catch(function(error) {
+        // An error happened
+        console.error(error);
+    });
+});
