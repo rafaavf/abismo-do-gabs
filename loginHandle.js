@@ -17,6 +17,7 @@ const database = getDatabase();
 const auth = getAuth(app);
 
 var cookieId = getCookie('_userid');
+var cookielogout = getCookie('_logout');
 // var cookieAccess = getCookie('_hasAccessMsg');
 // console.log(cookieAccess);
 
@@ -24,6 +25,9 @@ var cookieId = getCookie('_userid');
 //     alert('You do not have enough permission to join the API');
 //     // document.cookie = "_hasAcessMsg=false";
 // }
+
+console.log(cookieId);
+console.log(cookielogout)
 
 if (cookieId == null || cookieId == '') {
     console.log("OH NO A HACKER CLICKED INSPECT");
