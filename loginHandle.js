@@ -42,7 +42,7 @@ if (cookieId == null || cookieId == '') {
                     alert(`Verify you email before loging in! Didn't receive an email verification? Visit this link to get it resended:`)
                 } else {
                     const uid = userCredential.user.uid;
-                    document.cookie = "_userid=" + uid;
+                    document.cookie = "_userid=" + uid + ";;domain='rafaavf.github.io';";
                     location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
                 }
 
