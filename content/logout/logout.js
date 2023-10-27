@@ -30,7 +30,7 @@ if (thisUser == null||thisUser=='') {
     console.log(
         getCookie('_userid') + 
         ' ' +
-        getCookie('_logout)
+        getCookie('_logout')
     );
 });
 }
