@@ -24,11 +24,7 @@ if (thisUser == null||thisUser=='') {
 
  document.getElementById('logoutBtn').addEventListener('click', function logOut(){
     document.cookie = "_userid=null; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/abismo-do-gabs;";
-    document.cookie = "_logout=true;"
     location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html')
-
-    console.log(getCookie('_userid'));
-    console.log(getCookie('_logout'));
 });
 }
 

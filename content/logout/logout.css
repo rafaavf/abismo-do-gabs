@@ -1,5 +1,5 @@
 body{
-    background-image: url('../images/bg.jpg');
+    background-image: url('../assets/images/bg.jpg');
     background-color: black;
 }
 h1{
@@ -7,6 +7,18 @@ h1{
 }
 h2{
     color:white;
+}
+
+@font-face {
+    font-family: Pixelify_Sans;
+    src: url('../assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf');
+}
+@font-face {
+    font-family: SometypeMono;
+    src: url('../assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
+}
+.pixelify-sans-font{
+    font-family: Pixelify_Sans;
 }
 
 .cabecalho{
@@ -23,13 +35,16 @@ h2{
 .cabecalho-title{
     text-align: center;
     color:white;
+    font-size: large;
 }
 .cabecalho-links{
+    margin-top: -10px;
     display:flex;
     justify-content: space-evenly;
 }
 .cabecalho-links-text{
     color:white;
+    font-family: SometypeMono;
 }
 
 .content{
@@ -47,9 +62,12 @@ h2{
     color:white;
     margin-top: 2vw;
     margin-left:4vw;
+    font-family: Pixelify_Sans;
 }
 .contentText{
     text-align: center;
+    font-family: SometypeMono;
+    font-weight: lighter;
 }
 .logoutBtn{
     background-color: black;

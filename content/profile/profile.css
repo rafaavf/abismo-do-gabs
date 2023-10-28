@@ -1,15 +1,23 @@
 body{
-    background-image: url('../images/bg.jpg');
+    background-image: url('../assets/images/bg.jpg');
     background-color: black;
 }
 h1{
     color:white;
 }
+
+@font-face {
+    font-family: SometypeMono;
+    src: url('../assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
+}
 h2{
     color:white;
+    font-family: SometypeMono;
+    font-size: medium;
 }
 h3{
     color:white;
+    font-family: SometypeMono;
     font-size: small;
     font-weight: lighter;
 }
@@ -17,10 +25,22 @@ h3{
 ::placeholder {
     color: white;
     opacity: 1; 
+    font-family: SometypeMono;
+    font-weight: lighter;
   }
 ::-ms-input-placeholder { 
     color: white;
+    font-family: SometypeMono;
+    font-weight: lighter;
   }
+
+@font-face {
+    font-family: Pixelify_Sans;
+    src: url('../assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf');
+}
+.pixelify_sans_font{
+    font-family: Pixelify_Sans;
+}
 
 .cabecalho{
     margin-top: -20px;
@@ -36,18 +56,22 @@ h3{
 .cabecalho-title{
     text-align: center;
     color:white;
+    font-size: large;
 }
 .cabecalho-links{
+    margin-top: -10px;
     display:flex;
     justify-content: space-evenly;
 }
 .cabecalho-links-text{
     color:white;
+    font-family: SometypeMono;
 }
 .perfil{
     color:white;
     margin-top: 2vw;
     margin-left:4vw;
+    font-family: Pixelify_Sans;
 }
 .content{
     margin-left:auto;

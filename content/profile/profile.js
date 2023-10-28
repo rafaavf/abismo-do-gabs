@@ -34,7 +34,9 @@ if (thisUser == null) {
             document.getElementById('username').placeholder = thisUserData.username;
             document.getElementById('email').placeholder = thisUserData.email;
             document.getElementById('descriptionBox').textContent = thisUserData.description;
-            document.getElementById('joinDate').textContent = thisUserData.dateCreated.replace(' GMT-0300 (Horário Padrão de Brasília)', '');
+            document.getElementById('joinDate').textContent = thisUserData.dateCreated
+            .replace(' GMT-0300 (Horário Padrão de Brasília)', '')
+            .replace('GMT-0300 (Brasilia Standard Time)', '');
 
             (thisUserData.pfpUrl == '') ?
                 document.getElementById('pfp').src = 'https://cdn.discordapp.com/attachments/775875729094869003/1165346683039797299/b72a1cfe.png?ex=654684ac&is=65340fac&hm=c22686adb1b0b38a4473342b6d0639b1bd5a73b270d8bae8c4601c4b909dd543&'
@@ -47,7 +49,7 @@ if (thisUser == null) {
                     alert('Preencha a URL corretamente!')
                 } else {
                     try {
-                        update(ref(database, 'users/' + thisUser + '/'), {
+                        set(update(database, 'users/' + thisUser), {
                             pfpUrl: imgUrl
                         })
                         alert('Informação salva com sucesso :)');
