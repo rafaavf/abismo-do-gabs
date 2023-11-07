@@ -91,7 +91,7 @@ if (thisUser == null) {
                                     update(ref(database, 'users/' + thisUser + '/'), {
                                         email: email
                                     });
-                                    alert('Email e/ou username atualizados com sucesso :)');
+                                    alert('Email e/ou username atualizados com sucesso :) '+e);
                                 } catch (e) {
                                     console.log(e);
                                     alert('Ocorreu um erro ao atualizar o email na firebase.database, contate a responsável (Operação falhou)');
