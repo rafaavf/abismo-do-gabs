@@ -49,7 +49,7 @@ if (thisUser == null) {
                     alert('Preencha a URL corretamente!')
                 } else {
                     try {
-                        set(update(database, 'users/' + thisUser), {
+                        set(update(database, 'users/' + thisUser + '/'), {
                             pfpUrl: imgUrl
                         })
                         alert('Informação salva com sucesso :)');
