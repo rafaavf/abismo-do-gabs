@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, onValue, set, update } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, updateEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, updateEmail, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -35,21 +35,23 @@ if (thisUser == null) {
             document.getElementById('email').placeholder = thisUserData.email;
             document.getElementById('descriptionBox').textContent = thisUserData.description;
             document.getElementById('joinDate').textContent = thisUserData.dateCreated
-            .replace(' GMT-0300 (Horário Padrão de Brasília)', '')
-            .replace('GMT-0300 (Brasilia Standard Time)', '');
+                .replace(' GMT-0300 (Horário Padrão de Brasília)', '')
+                .replace('GMT-0300 (Brasilia Standard Time)', '');
 
-            (thisUserData.pfpUrl == '') ?
-                document.getElementById('pfp').src = 'https://cdn.discordapp.com/attachments/775875729094869003/1165346683039797299/b72a1cfe.png?ex=654684ac&is=65340fac&hm=c22686adb1b0b38a4473342b6d0639b1bd5a73b270d8bae8c4601c4b909dd543&'
+            (thisUserData.pfpUrl == '')
+                ? document.getElementById('pfp').src = 'https://cdn.discordapp.com/attachments/775875729094869003/1165346683039797299/b72a1cfe.png?ex=654684ac&is=65340fac&hm=c22686adb1b0b38a4473342b6d0639b1bd5a73b270d8bae8c4601c4b909dd543&'
                 : document.getElementById('pfp').src = thisUserData.pfpUrl;
 
             document.getElementById('pfpButton').addEventListener('click', async () => {
-                const imgUrl = await document.getElementById('pfpUrl').value;
+                const imgUrl = await document.getElementById("pfpUrl").value;
 
-                if (imgUrl == null) {
+                console.log('users/' + thisUser + '/pfpUrl')
+
+                if (imgUrl == null ) {
                     alert('Preencha a URL corretamente!')
                 } else {
                     try {
-                        set(update(database, 'users/' + thisUser + '/'), {
+                        update(ref(database, 'users/' + thisUser + '/'), {
                             pfpUrl: imgUrl
                         })
                         alert('Informação salva com sucesso :)');
@@ -63,8 +65,18 @@ if (thisUser == null) {
             document.getElementById('descriptionButton').addEventListener('click', async () => {
                 const description = await document.getElementById('descriptionBox').value;
 
-                if (description.length > 300) {
-                    alert('A descrição não deve superar 300 caracteres!');
+                var descArr = description.split(' ');
+                var canProceed = 0;
+                for (let i=0; i<descArr.length; i++){
+                    if (descArr[i].length>32){
+                        canProceed += 1;
+                    }
+                }
+
+                if (description.length > 100) {
+                    alert('A descrição não deve superar 100 caracteres!');
+                } else if (canProceed>0) { 
+                    alert('A descrição não deve conter mais de 32 caracteres não separados por um espaço');
                 } else {
                     try {
                         update(ref(database, 'users/' + thisUser + '/'), {
@@ -91,7 +103,8 @@ if (thisUser == null) {
                                     update(ref(database, 'users/' + thisUser + '/'), {
                                         email: email
                                     });
-                                    alert('Email e/ou username atualizados com sucesso :) '+e);
+                                    sendEmailVerification(auth.currentUser);
+                                    alert('Email e/ou username atualizados com sucesso :)');
                                 } catch (e) {
                                     console.log(e);
                                     alert('Ocorreu um erro ao atualizar o email na firebase.database, contate a responsável (Operação falhou)');
@@ -101,17 +114,22 @@ if (thisUser == null) {
                                 alert('Ocorreu um erro ao atualizar o email na firebase.auth, contate a responsável (Operação falhou)')
                             });
                         }
-                        if (username != thisUserData.email && username != '') {
-                            try {
-                                update(ref(database, 'users/' + thisUser + '/'), {
-                                    username: username
-                                });
-                                alert('Email e/ou username atualizados com sucesso :)');
-                            } catch (e) {
-                                console.log(e);
-                                alert('Ocorreu um erro :( se persistir, contate a responsável');
-                            }
 
+                        if (username != thisUserData.email && username != '') {
+                            if (username > 15) {
+                                alert('O nome de usuário não deve ultrapassar 15 caracteres!')
+                            } else {
+                                try {
+                                    update(ref(database, 'users/' + thisUser + '/'), {
+                                        username: username
+                                    });
+                                    alert('Email e/ou username atualizados com sucesso :)');
+                                } catch (e) {
+                                    console.log(e);
+                                    alert('Ocorreu um erro :( se persistir, contate a responsável');
+                                }
+
+                            }
                         }
 
                     })

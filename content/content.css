@@ -5,6 +5,9 @@ body{
 h1{
     color:white;
 }
+h2{
+    color:white;
+}
 
 @font-face {
     font-family: Pixelify_Sans;
@@ -13,6 +16,9 @@ h1{
 @font-face {
     font-family: SometypeMono;
     src: url('assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
+}@font-face {
+    font-family: SometypeMonoItalic;
+    src: url('assets/fonts/Sometype_Mono/static/SometypeMono-Italic.ttf');
 }
 
 .pixelify-sans-font{
@@ -60,4 +66,9 @@ h1{
     height: 450px;
     border: 2px solid white;
     border-radius: 20px;
+}
+
+.temporary{
+    font-family: SometypeMonoItalic;
+    margin-left: 5vw;
 }

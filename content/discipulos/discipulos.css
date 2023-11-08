@@ -1,0 +1,118 @@
+body{
+    background-image: url('../assets/images/bg.jpg');
+    background-color: black;
+}
+h1{
+    color:white;
+}
+h2{
+    color:white;
+}
+u{
+    color:white;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: Pixelify_Sans;
+    src: url('../assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf');
+}
+@font-face {
+    font-family: SometypeMono;
+    src: url('../assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
+}
+
+.pixelify-sans-font{
+    font-family: Pixelify_Sans;
+}
+
+.cabecalho{
+    margin-top: -20px;
+    margin-left:auto;
+    margin-right: auto;
+    background-color: black;
+    height: 100px;
+    width: 80vw;
+    border:2px solid white;
+    border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+}
+.cabecalho-title{
+    text-align: center;
+    color:white;
+    font-size: large;
+}
+.cabecalho-links{
+    margin-top: -10px;
+    display:flex;
+    justify-content: space-evenly;
+}
+.cabecalho-links-text{
+    color:white;
+    font-family: SometypeMono;
+}
+.content{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 25px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: black;
+    width: 80vw;
+    height: flex;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.userStyle{
+    margin-right: 18px;
+    margin-left: 18px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    border: 2px solid white;
+    border-radius: 20px;
+    height:200px;
+    width: 300px;
+    background-color: black;
+}
+.usernameDiv{
+    display: inline-flex;
+    align-items: center;
+}
+.pfpStyle{
+    margin-top:10px;
+    margin-left:20px;
+    height:50px;
+    width:50px;
+    border-radius:100px;
+    border: 2px solid white;
+}
+.usernameStyle{
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: SometypeMono;
+}
+.descriptionDiv{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.descriptionStyle{
+    font-family: SometypeMono;
+    font-size: 14px;
+}
+.roleDiv{
+    margin-left: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+.roleStyle{
+    font-family: SometypeMono;
+    font-size: 14px;
+}
+.dateCreatedStyle{
+    font-family: SometypeMono;
+    font-size: 14px;
+}

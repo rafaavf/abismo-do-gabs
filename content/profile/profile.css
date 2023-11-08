@@ -92,12 +92,14 @@ h3{
 
 
 .pfp{
-    border: 2px solid white;
+    border: 2px solid white;    
     border-radius: 20px;
     width: 300px;
     height: 320px;
 }
 .profilePicture{
+    border: 2px solid white;
+    border-radius:100px;
     margin-top:-80px;
     height:70px;
     width: 70px;
@@ -107,10 +109,10 @@ h3{
     background-color: black;
     color:white;
     border:2px solid white;
-    margin-left: 102px;
+    margin-left: 108px;
 }
 .pfpInput{
-    margin-left: 102px;
+    margin-left: 108px;
     margin-top: 10px;
     margin-bottom: -15px;
     background-color: black;
