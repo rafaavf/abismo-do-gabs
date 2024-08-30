@@ -29,7 +29,7 @@ onValue(thisUsersDataRef, (snapshot) => {
             const pfpUrl = document.createElement('img');
             pfpUrl.className = 'pfpStyle';
             i.pfpUrl == ''
-                ? pfpUrl.src = 'https://cdn.discordapp.com/attachments/775875729094869003/1165346683039797299/b72a1cfe.png?ex=654684ac&is=65340fac&hm=c22686adb1b0b38a4473342b6d0639b1bd5a73b270d8bae8c4601c4b909dd543&'
+                ? pfpUrl.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5bj96rRqWtfI7OMayBS5waxJBvUiQc88hvw&s'
                 : pfpUrl.src = i.pfpUrl;
 
             const username = document.createElement('u');
