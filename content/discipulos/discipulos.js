@@ -59,10 +59,7 @@ onValue(thisUsersDataRef, (snapshot) => {
 
             const dateCreated = document.createElement('u');
             dateCreated.className = 'dateCreatedStyle';
-            dateCreated.textContent = 'Entrou: ' + i.dateCreated
-                .replace('GMT-0300 (Brasilia Standard Time)', '')
-                .replace('GMT-0300 (Horário Padrão de Brasília)', '')
-                .replace('GMT-0400 (Horário de Verão do Leste)', '');
+            dateCreated.textContent = 'Entrou: ' + i.dateCreated.toDate().toLocaleDateString("pt-BR")
 
             document.getElementById('content')
                 .appendChild(newDiv)
