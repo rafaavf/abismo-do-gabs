@@ -23,7 +23,7 @@ onAuthStateChanged(auth, (user) => {
         onValue(thisUsernameRef, (snapshot) => {
             const thisUserData = snapshot.val();
             
-            if (thisUserData.hasAcess == null || !thisUserData.hasAcess) {
+            if (!thisUserData.hasAcess) {
                 location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
             } else {
                 document.getElementById("helloUser").textContent = `Olá, ${thisUserData.username}!`;
