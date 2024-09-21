@@ -20,9 +20,9 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
     if (user) {
         //location.assign('http://127.0.0.1:5500/content/content.html');
-       location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
-       console.log('has user')
-       console.log(user)
+        location.assign('https://rafaavf.github.io/abismo-do-gabs/content.html');
+        console.log('has user')
+        console.log(user)
         
     } else {
         console.log("OH NO A HACKER CLICKED INSPECT");
@@ -42,7 +42,7 @@ onAuthStateChanged(auth, (user) => {
                         await setPersistence(auth, browserLocalPersistence)
                             .then(() => {
                                 //location.assign('http://127.0.0.1:5500/content/content.html');
-                                location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+                                location.assign('https://rafaavf.github.io/abismo-do-gabs/content.html');
                             })
                             .catch((error) => {
                                 alert('Ocorreu um erro: ' + error.message);
