@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, sendEmailVerification, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -13,51 +13,54 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase();
+const database = getDatabase(app);
 const auth = getAuth(app);
 
-var cookieId = getCookie('_userid');
-var cookielogout = getCookie('_logout');
-// var cookieAccess = getCookie('_hasAccessMsg');
-// console.log(cookieAccess);
 
-// if (cookieAccess==true) {
-//     alert('You do not have enough permission to join the API');
-//     // document.cookie = "_hasAcessMsg=false";
-// }
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        //location.assign('http://127.0.0.1:5500/content/content.html');
+       location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+       console.log('has user')
+       console.log(user)
+        
+    } else {
+        console.log("OH NO A HACKER CLICKED INSPECT");
 
-console.log(cookieId);
-console.log(cookielogout)
+        document.getElementById('sendBtn').addEventListener("click", async () => {
+            const emailInfo = document.getElementById('login').value;
+            const passwordInfo = document.getElementById('password').value;
 
-if (cookieId == null || cookieId == '') {
-    console.log("OH NO A HACKER CLICKED INSPECT");
+            signInWithEmailAndPassword(auth, emailInfo, passwordInfo)
+                .then(async (userCredential) => {
+                    const user = userCredential.user;
 
-    document.getElementById('sendBtn').addEventListener("click", async () => {
-        const emailInfo = await document.getElementById('login').value;
-        const passwordInfo = await document.getElementById('password').value;
-
-        signInWithEmailAndPassword(auth, emailInfo, passwordInfo)
-            .then((userCredential) => {
-                if (!userCredential.user.emailVerified) {
-                    alert(`Verify you email before loging in! Didn't receive an email verification? Visit this link to get it resended:`)
-                } else {
-                    const uid = userCredential.user.uid;
-                    document.cookie = "_userid=" + uid;
-                    //location.assign('https://iplogger.com/2Jw1C3');
-                    location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html')
-                }
-
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                alert("The authentication failed :( check your email, password and if you have created and account already!");
-            });
-    });
-} else {
-    window.location.href = './content/content.html';
-}
+                    if (!user.emailVerified) {
+                        alert(`Verifique seu email para continuar! Acabamos de enviar um link novo para verificação no seu email :)`);
+                        await sendEmailVerification(user);
+                    } else {
+                        await setPersistence(auth, browserLocalPersistence)
+                            .then(() => {
+                                //location.assign('http://127.0.0.1:5500/content/content.html');
+                                location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+                            })
+                            .catch((error) => {
+                                alert('Ocorreu um erro: ' + error.message);
+                            });
+                    }
+                })
+                .catch((error) => {
+                    if (error.code == 'auth/wrong-password') {
+                        alert('A senha não corresponde :(');
+                    } else if (error.code == 'auth/user-not-found') {
+                        alert('Um usuário com esse email não existe, tente criar uma conta :(');
+                    } else {
+                        alert("Ocorreu um erro: " + error.message);
+                    }
+                });
+        });
+    }
+});
 
 function getCookie(name) {
     var cookies = document.cookie.split(';');

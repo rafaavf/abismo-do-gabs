@@ -1,0 +1,32 @@
+.login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.element {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+}
+
+.d {
+    position: absolute;
+    left: 10px;
+    bottom: 2px;
+}
+
+.cookies {
+    position: absolute;
+    left: 10px;
+    bottom: 0vw;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -70,8 +70,18 @@ h2{
     font-weight: lighter;
 }
 .logoutBtn{
+    /* position:absolute;
+    left: 50%; */
     background-color: black;
     color:white;
     border:2px solid white;
-    margin-left: 37vw;
+    padding: 20px 40px;
+    font-family: SometypeMono;
+    font-size: x-large;
+    cursor: pointer;
+}
+.contentBtn{
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center; 
 }

@@ -29,7 +29,7 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
     const auth = getAuth();
 
     if (createUsername == null || createUsername == '' || createUsername == ' ') {
-        alert('Ocorreu um erro :( === MENSAGEM: o campo usuário encontra-se nulo')
+        alert('Ocorreu um erro: o campo usuário encontra-se nulo')
     } else {
         createUserWithEmailAndPassword(auth, createEmail, createPassword)
             .then((userCredential) => {
@@ -43,7 +43,8 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
                     email: createEmail,
                     dateCreated: currentTimestamp,
                     description: '',
-                    pfpUrl: ''
+                    id: uid,
+                    hasAcess: false
                 })
 
                 sendEmailVerification(user);
@@ -51,10 +52,7 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
 
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                alert('Ocorreu um erro :( === ' + 'CÓDIGO: ' + errorCode + ' === MENSAGEM: ' + errorMessage);
+                alert('Ocorreu um erro: ' + error.message + '|| Código de erro: ' + error.code)
             });
     }
 })

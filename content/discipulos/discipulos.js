@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getDatabase, ref as databaseRef, onValue } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -14,82 +15,92 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const storage = getStorage(app); 
-const thisUser = getCookie('_userid');
+const storage = getStorage(app);
+const auth = getAuth(app);
 
-const thisUsersDataRef = databaseRef(database, '/users/');
-onValue(thisUsersDataRef, (snapshot) => {
-    const thisUsersData = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const thisUsersDataRef = databaseRef(database, '/users/');
+        const userDataRef = databaseRef(database, '/users/' + user.uid);
+        onValue(userDataRef, (snapshot)=>{
+            const userData = snapshot.val()
+            if (!userData.hasAcess){
+                location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+            }
+        })
 
-    thisUsersData.forEach(async (i) => {
-        if (i.hasAcess) {
-            const newDiv = document.createElement('div');
-            newDiv.className = 'userStyle';
+        onValue(thisUsersDataRef, (snapshot) => {
+            const thisUsersData = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
 
-            const pfpElement = document.createElement('img');
-            pfpElement.className = 'pfpStyle';
+            thisUsersData.forEach(async (i) => {
+                if (i.hasAcess) {
+                    const newDiv = document.createElement('div');
+                    newDiv.className = 'userStyle';
 
-            getImagesFromStorageFolder('users/' + i.id + '/pfp').then(url=>{
-                if (url.length > 0) {
-                    pfpElement.src = url[0];
-                } else {
-                    throw new Error('No images found'); 
+                    const pfpElement = document.createElement('img');
+                    pfpElement.className = 'pfpStyle';
+
+                    getImagesFromStorageFolder('users/' + i.id + '/pfp').then(url => {
+                        if (url.length > 0) {
+                            pfpElement.src = url[0];
+                        } else {
+                            throw new Error('No images found');
+                        }
+                    }).catch(e => {
+                        getImagesFromStorageFolder('assets/pfpImg').then(newUrl => {
+                            pfpElement.src = newUrl[0]
+                        })
+                    })
+
+                    const username = document.createElement('u');
+                    username.className = 'usernameStyle';
+                    username.textContent = i.username;
+
+                    const usernameDiv = document.createElement('div');
+                    usernameDiv.className = 'usernameDiv';
+
+                    const description = document.createElement('u');
+                    description.className = 'descriptionStyle';
+                    description.textContent = i.description === '' ? '[Sem descrição]' : i.description;
+
+                    const descriptionDiv = document.createElement('div');
+                    descriptionDiv.className = 'descriptionDiv';
+
+                    const role = document.createElement('u');
+                    role.className = 'roleStyle';
+                    role.textContent = i.role ? 'Cargo: ' + i.role : 'Cargo: Nenhum';
+
+                    const roleDiv = document.createElement('div');
+                    roleDiv.className = 'roleDiv';
+
+                    const dateCreated = document.createElement('u');
+                    dateCreated.className = 'dateCreatedStyle';
+                    const dateCreatedTransformed = new Date(i.dateCreated);
+                    dateCreated.textContent = 'Entrou: ' + dateCreatedTransformed.toLocaleDateString("pt-BR");
+
+                    document.getElementById('content')
+                        .appendChild(newDiv)
+                        .appendChild(usernameDiv)
+                        .appendChild(pfpElement);
+                    usernameDiv.appendChild(username);
+
+                    newDiv.appendChild(document.createElement('br'));
+                    newDiv.appendChild(descriptionDiv);
+                    descriptionDiv.appendChild(description);
+
+                    newDiv.appendChild(roleDiv);
+                    roleDiv.appendChild(role);
+                    roleDiv.appendChild(dateCreated);
                 }
-            }).catch(e=>{
-                getImagesFromStorageFolder('assets/pfpImg').then(newUrl=>{
-                    pfpElement.src = newUrl[0]
-                })
-            })
-
-            const username = document.createElement('u');
-            username.className = 'usernameStyle';
-            username.textContent = i.username;
-
-            const usernameDiv = document.createElement('div');
-            usernameDiv.className = 'usernameDiv';
-
-            const description = document.createElement('u');
-            description.className = 'descriptionStyle';
-            description.textContent = i.description === '' ? '[Sem descrição]' : i.description;
-
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.className = 'descriptionDiv';
-
-            const role = document.createElement('u');
-            role.className = 'roleStyle';
-            role.textContent = i.role ? 'Cargo: ' + i.role : 'Cargo: Nenhum';
-
-            const roleDiv = document.createElement('div');
-            roleDiv.className = 'roleDiv';
-
-            const dateCreated = document.createElement('u');
-            dateCreated.className = 'dateCreatedStyle';
-            const dateCreatedTransformed = new Date(i.dateCreated);
-            dateCreated.textContent = 'Entrou: ' + dateCreatedTransformed.toLocaleDateString("pt-BR");
-
-            document.getElementById('content')
-                .appendChild(newDiv)
-                .appendChild(usernameDiv)
-                .appendChild(pfpElement);
-            usernameDiv.appendChild(username);
-
-            newDiv.appendChild(document.createElement('br'));
-            newDiv.appendChild(descriptionDiv);
-            descriptionDiv.appendChild(description);
-
-            newDiv.appendChild(roleDiv);
-            roleDiv.appendChild(role);
-            roleDiv.appendChild(dateCreated);
-        }
-    });
+            });
+        });
+    } else {
+        location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+    }
 });
 
-if (!thisUser) {
-    location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
-}
-
 async function getImagesFromStorageFolder(path) {
-    const folderRef = storageRef(storage, path); 
+    const folderRef = storageRef(storage, path);
     const result = await listAll(folderRef);
     const imageUrls = [];
 
