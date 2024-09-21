@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <title>abismo do gabs</title>
     <link rel="stylesheet" href="profile.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.jpg">
 </head>
 
 <body>
@@ -37,9 +38,20 @@
             <div>
                 <div class="pfp">
                     <h2 style="margin-left:2vw">Foto de perfil:</h2>
-                    <button class="pfpButton" id="pfpButton">Enviar</button>
-                    <input class='pfpInput' id="pfpUrl" placeholder="Insira a Url da imagem">
-                    <image class="profilePicture" id="pfp"></image>
+
+                    <div class="pfpFlex">
+                        <img class="profilePicture" id="pfp"/>
+                        <div>
+                            <label for="file-upload" class="pfpFileInput" >
+                                Escolha um arquivo
+                            </label>
+                        <input id="file-upload" type="file" accept="image/*"/>
+                            <input type="file" id="imageUpload"/>
+                            <button class="pfpButton" id="pfpButton">Upload</button>
+                        </div>
+                    </div>
+                    
+                    
 
                     <div class="description">
                         <h2 style="margin-left:2vw">Descrição</h2>
@@ -80,14 +92,7 @@
                     <h2 class="informationTitle">Informações</h2>
 
                     <div class="informationText">
-                        <div>
-                            <h3>
-                                Para mudar a foto de perfil é necessário uma URL de imagem e que a imagem seja quadrada.
-                                Para conseguir um URL, o mais fácil é mandar a foto no discord, clicar em "Abrir no
-                                navegador"
-                                e copiar o link.
-                            </h3>
-                        </div>
+
                         <div>
                             <h3>
                                 A senha serve para mudar o username e o email. Para mudar sua senha, realize log out e

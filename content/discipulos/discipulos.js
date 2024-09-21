@@ -1,5 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getDatabase, ref as databaseRef, onValue } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -12,25 +13,33 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase();
+const database = getDatabase(app);
+const storage = getStorage(app); 
 const thisUser = getCookie('_userid');
 
-const thisUsersDataRef = ref(database, '/users/');
-
+const thisUsersDataRef = databaseRef(database, '/users/');
 onValue(thisUsersDataRef, (snapshot) => {
     const thisUsersData = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
 
-    thisUsersData.forEach(i => {
+    thisUsersData.forEach(async (i) => {
         if (i.hasAcess) {
-
             const newDiv = document.createElement('div');
             newDiv.className = 'userStyle';
 
-            const pfpUrl = document.createElement('img');
-            pfpUrl.className = 'pfpStyle';
-            i.pfpUrl == ''
-                ? pfpUrl.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5bj96rRqWtfI7OMayBS5waxJBvUiQc88hvw&s'
-                : pfpUrl.src = i.pfpUrl;
+            const pfpElement = document.createElement('img');
+            pfpElement.className = 'pfpStyle';
+
+            getImagesFromStorageFolder('users/' + i.id + '/pfp').then(url=>{
+                if (url.length > 0) {
+                    pfpElement.src = url[0];
+                } else {
+                    throw new Error('No images found'); 
+                }
+            }).catch(e=>{
+                getImagesFromStorageFolder('assets/pfpImg').then(newUrl=>{
+                    pfpElement.src = newUrl[0]
+                })
+            })
 
             const username = document.createElement('u');
             username.className = 'usernameStyle';
@@ -41,30 +50,27 @@ onValue(thisUsersDataRef, (snapshot) => {
 
             const description = document.createElement('u');
             description.className = 'descriptionStyle';
-            i.description == '' || i.description == ''
-                ? description.textContent = '[Sem descrição]'
-                : description.textContent = i.description;
+            description.textContent = i.description === '' ? '[Sem descrição]' : i.description;
 
             const descriptionDiv = document.createElement('div');
             descriptionDiv.className = 'descriptionDiv';
 
             const role = document.createElement('u');
             role.className = 'roleStyle';
-            i.role == null
-                ? role.textContent = 'Cargo: Nenhum'
-                : role.textContent = 'Cargo: ' + i.role;
+            role.textContent = i.role ? 'Cargo: ' + i.role : 'Cargo: Nenhum';
 
             const roleDiv = document.createElement('div');
-            roleDiv.className = 'roleDiv'
+            roleDiv.className = 'roleDiv';
 
             const dateCreated = document.createElement('u');
             dateCreated.className = 'dateCreatedStyle';
-            dateCreated.textContent = 'Entrou: ' + i.dateCreated.toDate().toLocaleDateString("pt-BR")
+            const dateCreatedTransformed = new Date(i.dateCreated);
+            dateCreated.textContent = 'Entrou: ' + dateCreatedTransformed.toLocaleDateString("pt-BR");
 
             document.getElementById('content')
                 .appendChild(newDiv)
                 .appendChild(usernameDiv)
-                .appendChild(pfpUrl);
+                .appendChild(pfpElement);
             usernameDiv.appendChild(username);
 
             newDiv.appendChild(document.createElement('br'));
@@ -74,23 +80,33 @@ onValue(thisUsersDataRef, (snapshot) => {
             newDiv.appendChild(roleDiv);
             roleDiv.appendChild(role);
             roleDiv.appendChild(dateCreated);
-
         }
+    });
+});
 
-    })
-
-})
-
-if (thisUser == null || thisUser == '') {
+if (!thisUser) {
     location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
 }
 
+async function getImagesFromStorageFolder(path) {
+    const folderRef = storageRef(storage, path); 
+    const result = await listAll(folderRef);
+    const imageUrls = [];
+
+    for (const itemRef of result.items) {
+        const url = await getDownloadURL(itemRef);
+        imageUrls.push(url);
+    }
+
+    return imageUrls;
+}
+
 function getCookie(name) {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
         if (cookie.indexOf(name + "=") === 0) {
-            return cookie.substring(name.length + 1, cookie.length);
+            return cookie.substring(name.length + 1);
         }
     }
     return "";

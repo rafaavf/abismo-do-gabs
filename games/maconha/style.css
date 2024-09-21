@@ -1,12 +1,28 @@
 html, body {
   margin: 0;
-  padding: 0;
+  height: 100%;
+  overflow: hidden;
   background-color: black;
   background-image: url('../../content/assets/images/bg.jpg');
 }
+
+@font-face {
+  font-family: SometypeMono;
+  src: url('../../content/assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
+}
+
 canvas {
   display: block;
-  margin-left:20vw;
-  border-radius:20px;
   border: 2px solid white;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content{
+  color: white;
+  margin-left: 30px;
+  margin-top: 30px;
+  font-size: large;
+  font-family: SometypeMono;
 }

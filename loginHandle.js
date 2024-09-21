@@ -43,8 +43,8 @@ if (cookieId == null || cookieId == '') {
                 } else {
                     const uid = userCredential.user.uid;
                     document.cookie = "_userid=" + uid;
-                    location.assign('https://iplogger.com/2Jw1C3');
-                    //location.assign('http://127.0.0.1:5500/content/content.html')
+                    //location.assign('https://iplogger.com/2Jw1C3');
+                    location.assign('http://127.0.0.1:5500/content/content.html')
                 }
 
             })

@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebas
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
     authDomain: "abismo-do-gabs.firebaseapp.com",
@@ -16,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 const auth = getAuth(app);
 const thisUser = getCookie('_userid');
+const storage = getStorage(app);
 
 
 if (thisUser == null || thisUser == '') {

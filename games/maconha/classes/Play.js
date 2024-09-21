@@ -1,0 +1,6 @@
+class Play {
+    constructor(){
+    }
+
+    
+}

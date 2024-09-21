@@ -90,17 +90,22 @@ h3{
     justify-content: space-between;
 }
 
-
+input[type="file"] {
+    display: none;
+  }
 .pfp{
     border: 2px solid white;    
     border-radius: 20px;
     width: 300px;
     height: 320px;
 }
+.pfpFlex{
+    display: inline-flex;
+    justify-content: space-between;
+}
 .profilePicture{
     border: 2px solid white;
     border-radius:100px;
-    margin-top:-80px;
     height:70px;
     width: 70px;
     margin-left:2vw;
@@ -109,15 +114,21 @@ h3{
     background-color: black;
     color:white;
     border:2px solid white;
-    margin-left: 108px;
-}
-.pfpInput{
-    margin-left: 108px;
     margin-top: 10px;
-    margin-bottom: -15px;
+    margin-left: 20px;
+    font-family: SometypeMono
+}
+.pfpFileInput{
     background-color: black;
-    color: white;
-    border: 2px solid white;
+    color:white;
+    border:2px solid white;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: 6px 12px;
+    display: inline-block;
+    cursor: pointer;
+    font-family: SometypeMono;
+    font-size: small;
 }
 
 .descriptionItems{
@@ -126,6 +137,7 @@ h3{
     color:white;
     border:2px solid white;
     border-radius: white;
+    font-family: SometypeMono
 }
 
 .data{
@@ -148,6 +160,7 @@ h3{
     color:white;
     border:2px solid white;
     margin-top: 4px;
+    font-family: SometypeMono
 }
 
 .information{
