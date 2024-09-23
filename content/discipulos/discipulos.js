@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getDatabase, ref as databaseRef, onValue } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -18,6 +18,9 @@ const database = getDatabase(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
 
+let defaultPfpUrl;
+getDefaultPfp()
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const thisUsersDataRef = databaseRef(database, '/users/');
@@ -25,6 +28,7 @@ onAuthStateChanged(auth, (user) => {
         onValue(userDataRef, (snapshot)=>{
             const userData = snapshot.val()
             if (!userData.hasAcess){
+                signOut(auth);
                 location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
             }
         })
@@ -47,9 +51,7 @@ onAuthStateChanged(auth, (user) => {
                             throw new Error('No images found');
                         }
                     }).catch(e => {
-                        getImagesFromStorageFolder('assets/pfpImg').then(newUrl => {
-                            pfpElement.src = newUrl[0]
-                        })
+                        pfpElement.src = defaultPfpUrl;
                     })
 
                     const username = document.createElement('u');
@@ -112,13 +114,9 @@ async function getImagesFromStorageFolder(path) {
     return imageUrls;
 }
 
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.indexOf(name + "=") === 0) {
-            return cookie.substring(name.length + 1);
-        }
+async function getDefaultPfp() {
+    const urls = await getImagesFromStorageFolder('assets/pfpImg');
+    if (urls.length > 0) {
+        defaultPfpUrl = urls[0];
     }
-    return "";
 }

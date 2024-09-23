@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, signOut, sendEmailVerification, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, signOut, sendEmailVerification, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -19,8 +19,8 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        //location.assign('http://127.0.0.1:5500/content/content.html');
-        location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
+        location.assign('http://127.0.0.1:5500/content/content.html');
+        //location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
         console.log('has user')
         console.log(user)
         
@@ -41,8 +41,8 @@ onAuthStateChanged(auth, (user) => {
                     } else {
                         await setPersistence(auth, browserLocalPersistence)
                             .then(() => {
-                                //location.assign('http://127.0.0.1:5500/content/content.html');
-                                location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
+                                location.assign('http://127.0.0.1:5500/content/content.html');
+                                //location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
                             })
                             .catch((error) => {
                                 alert('Ocorreu um erro: ' + error.message);

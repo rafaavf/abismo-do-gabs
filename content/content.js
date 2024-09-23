@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9D8cgdz_uAVxaMmcZgaQeF7k5_IflfE8",
@@ -24,7 +24,9 @@ onAuthStateChanged(auth, (user) => {
             const thisUserData = snapshot.val();
             
             if (!thisUserData.hasAcess) {
+                signOut(auth);
                 location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+                console.log('no access')
             } else {
                 document.getElementById("helloUser").textContent = `Olá, ${thisUserData.username}!`;
             }

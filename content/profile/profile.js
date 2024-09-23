@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getDatabase, ref as databaseRef, onValue, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, updateEmail, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, updateEmail, sendEmailVerification, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getStorage, ref as storageRef, uploadBytes, listAll, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -25,6 +25,7 @@ onAuthStateChanged(auth, (user) => {
         onValue(thisUserDataRef, (snapshot) => {
             const userData = snapshot.val()
             if (!userData.hasAcess) {
+                signOut(auth);
                 location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
             }
         })
@@ -60,9 +61,9 @@ onAuthStateChanged(auth, (user) => {
                     alert("Por favor, selecione uma imagem que tenha algum dos seguintes formatos: png, jpeg, jpg")
                 } else {
                     console.log(file.type)
-                    deleteFile('users/' + thisUserData.id + '/pfp/' + thisUserData.id + '_pfp');
+                    deleteFile('users/' + user.uid + '/pfp/' + user.uid + '_pfp');
 
-                    const imageRef = storageRef(storage, 'users/' + thisUserData.id + '/pfp/' + thisUserData.id + '_pfp');
+                    const imageRef = storageRef(storage, 'users/' + user.uid + '/pfp/' + user.uid + '_pfp');
 
                     const uploadTask = uploadBytes(imageRef, file);
 
