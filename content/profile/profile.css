@@ -79,15 +79,18 @@ h3{
     margin-top: 25px;
     background-color: black;
     width: 80vw;
-    height: 450px;
+    height: auto;
     border: 2px solid white;
     border-radius: 20px;
 }
 .contentFlex{
     margin-left: 5vw;
     margin-right: 5vw;
+    margin-bottom: 25px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
 input[type="file"] {

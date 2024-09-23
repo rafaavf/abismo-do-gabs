@@ -55,12 +55,13 @@ u{
     margin-left:auto;
     margin-right:auto;
     margin-top: 25px;
-    display:flex;
+    margin-bottom: 25px;
+    display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     background-color: black;
     width: 80vw;
-    height: flex;
+    height: auto;
     border: 2px solid white;
     border-radius: 20px;
 }

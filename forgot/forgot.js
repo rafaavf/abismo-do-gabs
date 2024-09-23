@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 
 
@@ -21,21 +21,20 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         //location.assign('http://127.0.0.1:5500/content/content.html');
         location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
-        
+
     } else {
-        document.getElementById('sendBtn').addEventListener('click', async ()=>{
+        document.getElementById('sendBtn').addEventListener('click', async () => {
             const email = await document.getElementById('login').value;
 
-            if (email == ''){
+            if (email == '') {
                 alert('Por favor, preencha o campo de email antes de enviar!');
             } else {
                 sendPasswordResetEmail(auth, email).then(task => {
-                alert("Email de redefinição enviado com sucesso :)");
-                }). catch(e=>{
+                    alert("Email de redefinição enviado com sucesso :)");
+                }).catch(e => {
                     alert("Ocorreu um erro: " + e.message + "|| Código de erro: " + e.code);
                 })
             }
         })
-        }
     }
 });
