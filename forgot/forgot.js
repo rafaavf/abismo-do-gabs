@@ -17,31 +17,25 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const thisUser = getCookie('_userid');
 
-if (thisUser == null || thisUser == '') {
-    location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
-} else {
-    document.getElementById('sendBtn').addEventListener('click', async ()=>{
-        const email = await document.getElementById('login').value;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        //location.assign('http://127.0.0.1:5500/content/content.html');
+        location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
+        
+    } else {
+        document.getElementById('sendBtn').addEventListener('click', async ()=>{
+            const email = await document.getElementById('login').value;
 
-        if (email == ''){
-            alert('Por favor, preencha o campo de email antes de enviar!');
-        } else {
-            sendPasswordResetEmail(auth, email).then(task => {
+            if (email == ''){
+                alert('Por favor, preencha o campo de email antes de enviar!');
+            } else {
+                sendPasswordResetEmail(auth, email).then(task => {
                 alert("Email de redefinição enviado com sucesso :)");
-              }). catch(e=>{
-                alert("Ocorreu um erro: " + e.message + "|| Código de erro: " + e.code);
-              })
-        }
-    })
-}
-
-function getCookie(name) {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.indexOf(name + "=") === 0) {
-            return cookie.substring(name.length + 1, cookie.length);
+                }). catch(e=>{
+                    alert("Ocorreu um erro: " + e.message + "|| Código de erro: " + e.code);
+                })
+            }
+        })
         }
     }
-    return "";
-}
+});
