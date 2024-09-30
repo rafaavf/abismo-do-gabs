@@ -68,9 +68,7 @@ onAuthStateChanged(auth, (user) => {
                     const uploadTask = uploadBytes(imageRef, file);
 
                     uploadTask.then((snapshot) => {
-                        console.log('Upload is ' + (snapshot.bytesTransferred / snapshot.totalBytes) * 100 + '% done');
                         getDownloadURL(snapshot.ref).then((downloadURL) => {
-                            console.log('File available at:', downloadURL);
                             alert('Upload realizado com sucesso :)');
                             window.location.reload()
                         });
@@ -82,13 +80,19 @@ onAuthStateChanged(auth, (user) => {
             });
 
             document.getElementById('sendBtn').addEventListener('click', async () => {
-                var username = document.getElementById('username').value;
+                var username = document.getElementById('username').value
                 var email = document.getElementById('email').value.replace(' ', '');
                 var password = document.getElementById('password').value;
+
+                if (username.replace(/\s+g/, '') == '' && username.length > 0){
+                    alert('Por favor, não preencha o nome de usuário com espaços');
+                } else if (username.length > 15) {
+                    alert('o nome de usuário não deve ultrapassar 15 caracteres')           
+                } else {
             
                 signInWithEmailAndPassword(auth, thisUserData.email, password)
                     .then((userCredential) => {
-                        if (email != thisUserData.email && email != '') {
+                        if (email != thisUserData.email && email != '' && email.replace(/\s+g/, '') != '' ) {
                             updateEmail(auth.currentUser, email).then(() => {
                                 try {
                                     update(databaseRef(database, 'users/' + user.uid + '/'), {
@@ -98,18 +102,15 @@ onAuthStateChanged(auth, (user) => {
                                     alert('Email e/ou username atualizados com sucesso :)');
                                 } catch (e) {
                                     console.log(e);
-                                    alert('Ocorreu um erro ao atualizar o email na firebase.database, contate a responsável (Operação falhou)');
+                                    alert('Ocorreu um erro: ' + e.message);
                                 }
                             }).catch((error) => {
                                 console.log(error);
-                                alert('Ocorreu um erro ao atualizar o email na firebase.auth, contate a responsável (Operação falhou)');
+                                alert('Ocorreu um erro: ' + e.message);
                             });
                         }
             
                         if (username != thisUserData.email && username != '') {
-                            if (username > 15) {
-                                alert('O nome de usuário não deve ultrapassar 15 caracteres!');
-                            } else {
                                 try {
                                     update(databaseRef(database, 'users/' + user.uid + '/'), {
                                         username: username
@@ -117,15 +118,15 @@ onAuthStateChanged(auth, (user) => {
                                     alert('Email e/ou username atualizados com sucesso :)');
                                 } catch (e) {
                                     console.log(e);
-                                    alert('Ocorreu um erro: ' + e.message + 'Código de erro: ' + e.code);
+                                    alert('Ocorreu um erro: ' + e.message);
                                 }
-                            }
                         }
                     })
                     .catch((error) => {
                         console.log(error);
-                        alert('Ocorreu um erro :( se persistir, contate a responsável');
+                        alert('Ocorreu um erro: ' + e.message);
                     });
+                }
             });
         });
         document.getElementById('descriptionButton').addEventListener('click', async () => {

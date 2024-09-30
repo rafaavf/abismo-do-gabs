@@ -28,7 +28,7 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
 
     const auth = getAuth();
 
-    if (createUsername == null || createUsername == '' || createUsername == ' ') {
+    if (createUsername.length === 0 || title.replace(/\s+/g, '') == '') {
         alert('Ocorreu um erro: o campo usuário encontra-se nulo')
     } else {
         createUserWithEmailAndPassword(auth, createEmail, createPassword)

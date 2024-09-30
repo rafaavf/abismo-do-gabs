@@ -1,0 +1,241 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+  background-image: url('../../../content/assets/images/bg.jpg');
+}
+
+@font-face {
+  font-family: PixelatedDisplay;
+  src: url('../assets/pixelated_display/PixelatedDisplay.ttf');
+}
+
+input[type="file"] {
+  display: none;
+}
+
+h1 {
+  font-family: PixelatedDisplay;
+}
+
+canvas {
+  display: block;
+  border: 2px solid white;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.content {
+  background-color: black;
+  background-image: url('../assets/scenario pixelate.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 1000px;
+  height: 550px;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+/* .burnBookDiv{
+    display: inline-flex;
+    align-items: center;
+  } */
+.burnBook {
+  width: 550px;
+  height: 550px;
+  margin-left: -50px;
+}
+
+.createDiv {
+  /* background-image: url('../assets/paper bg pixelate.png');
+  background-repeat: no-repeat;
+  background-size: contain; */
+  position: static;
+  margin-left: 480px;
+  margin-top: -450px;
+}
+
+.titleFileDiv {
+  position:relative;
+  top: -350px;
+  left: 35px;
+  width: 300px;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.coverImg {
+  position: relative;
+  left: 180px;
+  top: -80px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(0, 0, 0, 0.406);
+  border-radius: 10px;
+}
+
+.coverText {
+  position: relative;
+  left: 70px;
+  text-align: left;
+}
+
+.inputLabel {
+  position: relative;
+  top: -15px;
+  left: 80px;
+  padding: 3px 10px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.406);
+  border-radius: 10px;
+  font-family: PixelatedDisplay;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.inputLabel::before{
+  content: '';
+  position: absolute;
+  left: -2px;
+  top:-2px;
+  padding: 14.3px 40.5px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 2;
+  color: white;
+}
+
+.inputLabel:hover::before{
+  background-color:   #0000003a;
+  color: white;
+}
+
+.titleText {
+  position: relative;
+  right: 33px;
+  text-align: left;
+}
+
+.title {
+  position: relative;
+  top: -18px;
+  right: 30px;
+  padding: 3px 10px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.406);
+  border-radius: 10px;
+  width: 150px;
+  font-family: PixelatedDisplay;
+}
+
+.titleFileDiv {
+  position: relative;
+}
+
+.titleDiv {
+  position: relative;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-title{
+  position:relative;
+  top:-430px;
+  left: 50px;
+}
+
+.multi-select-list {
+  position: relative;
+  left:95px;
+  top: -440px;
+  display: inline-block;
+  border: 2px solid #00000085;
+  border-radius: 5px;
+  width: 300px; /* Set a max width for the list */
+  overflow-y: auto; /* Allow scrolling if needed */
+  height: 110px; /* Set a max height */
+}
+
+.list-content {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.list-item {
+  padding: 3px;
+  color: black; /* Text color */
+  font-family: PixelatedDisplay;
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Change the background color of the item when hovered */
+.list-item:hover {
+  background-color: #0000003a; /* Color when hovered */
+  color: white; /* Text color when hovered */
+}
+
+/* Change background color for selected item */
+.list-item.selected {
+  background-color: #000000ab; /* Selected item background color */
+  color: white; /* Text color for selected item */
+}
+
+.multi-select-list::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.multi-select-list::-webkit-scrollbar-track {
+  background: transparent; /* Track color */
+}
+
+.multi-select-list::-webkit-scrollbar-thumb {
+  background: #000000; /* Scrollbar color */
+  border-radius: 4px; /* Rounded edges */
+}
+
+.multi-select-list::-webkit-scrollbar-thumb:hover {
+  background: #000000; /* Color when hovering */
+}
+
+.send-btn{
+  position: relative;
+  top: -400;
+  right: 90px;
+  z-index: 1;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 2px solid #00000085;
+  border-radius: 10px;
+  font-family: PixelatedDisplay;
+  cursor: pointer;
+}
+
+.send-btn::before{
+  content: '';
+  position: absolute;
+  left: -2.3px;
+  top:-2.3px;
+  padding: 20px 44.6px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 2;
+  color: white;
+}
+
+.send-btn:hover::before{
+  background-color:   #0000003a;
+  color: white;
+}

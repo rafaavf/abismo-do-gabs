@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>burn book</title>
+    <link rel="stylesheet" href="/games/burn-book/create/create.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/eye.jpg">
+</head>
+
+<body>
+    <div class="container">
+        <div id="content" class="content">
+            <div class="burnBookDiv">
+                <img src="../assets/burn book pink pixelate.png" class="burnBook" />
+
+                <div class="createDiv">
+                    <img src="../assets/paper bg pixelate.png" class="bg-image">
+                    <div class="titleFileDiv">
+
+                        <div class="titleDiv">
+                            <h1 class="titleText">Título</h1>
+                            <input type="text" id="title" class="title">
+                        </div>
+
+                        <div class="fileDiv">
+                            <h1 class="coverText">Capa</h1>
+                            <input type="file" id="cover" accept="image/*">
+                            <label for="cover" class="inputLabel">Upload</label>
+                            <img id="coverImg" class="coverImg" src="../assets/eye.jpg">
+
+                        </div>
+                    </div>
+
+                    <h1 class="list-title">Autores</h1>
+                    <div class="multi-select-list">
+                        <ul class="list-content" id="select-user">
+                        </ul>
+                    </div>
+
+                    <button id="send" class="send-btn">enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="create.js"></script>
+
+</body>
+
+</html>

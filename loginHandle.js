@@ -21,8 +21,6 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         //location.assign('http://127.0.0.1:5500/content/content.html');
         location.assign('https://rafaavf.github.io/abismo-do-gabs/content/content.html');
-        console.log('has user')
-        console.log(user)
         
     } else {
         console.log("OH NO A HACKER CLICKED INSPECT");
