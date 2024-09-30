@@ -4,7 +4,7 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: black;
-  background-image: url('../../../content/assets/images/bg.jpg');
+  background-image: url('../assets/bg.jpg');
 }
 
 @font-face {
@@ -37,7 +37,7 @@ canvas {
 
 .content {
   background-color: black;
-  background-image: url('../assets/scenario pixelate.png');
+  background-image: url('../assets/scenario-pixelate.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

@@ -3,14 +3,9 @@ html, body {
     height: 100%;
     overflow: hidden;
     background-color: black;
-    background-image: url('../../../content/assets/images/bg.jpg');
+    background-image: url('../assets/bg.jpg');
   }
-  
-  @font-face {
-    font-family: SometypeMono;
-    src: url('../../../content/assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
-  }
-  
+
   canvas {
     display: block;
     border: 2px solid white;
@@ -27,7 +22,7 @@ html, body {
   }
   .content{
     background-color: black;
-    background-image: url('../assets/scenario pixelate.png');
+    background-image: url('../assets/scenario-pixelate.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
