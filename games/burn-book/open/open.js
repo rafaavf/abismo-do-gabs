@@ -563,7 +563,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             const date = blockDiv.querySelector('.date');
                             date.textContent = v.date;
 
-                            const coverImg = blockDiv.getElementById(`coverImg-${key}`);
+                            const coverImg = document.getElementById(`coverImg-${key}`);
 
                             if (v.hasCoverImg) {
                                 getImagesFromStorageFolder(`games/burn-book/game-data/${value}/content/${key}/coverImg`).then(async (h) => {
