@@ -343,10 +343,10 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                 addNewText('Insira texto', value, key);
                             });
 
-                            addImgButton.addEventListener('click',  () => {
+                            addImgButton.addEventListener('click', () => {
 
-                               addNewImage(value, key)
-                               console.log('abc')
+                                addNewImage(value, key)
+                                console.log('abc')
 
                             })
 
@@ -383,7 +383,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                 const blockTextArea = document.createElement('textarea');
                                                 blockTextArea.spellcheck = false;
                                                 blockTextArea.value = vv.text;
-                                                blockTextArea.id = `block-textArea-${k}`;
+                                                blockTextArea.id = `block-textArea-${key}-${k}`;
                                                 blockTextArea.className = 'blockTextArea';
 
                                                 setTimeout(async () => {
@@ -402,7 +402,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                 blockTextArea.addEventListener('input', async () => {
                                                     const pathRef = databaseRef(database, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}`)
                                                     update(pathRef, {
-                                                        text: document.getElementById(`block-textArea-${k}`).value,
+                                                        text: document.getElementById(`block-textArea-${key}-${k}`).value,
                                                     }).catch(e => { console.log(e) });
                                                     const snapshot = await get(pathRef);
 
@@ -445,7 +445,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                     const file = event.target.files[0];
                                                     if (file && file.type.startsWith('image/')) {
                                                         coverImg.src = URL.createObjectURL(file);
-                
+
                                                         const pathStorageRef = storageRef(storage, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}/${k}_img`);
                                                         const uploadTask = uploadBytes(pathStorageRef, file);
                                                         uploadTask.then((h) => {
@@ -472,16 +472,16 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                     const userConfirm = confirm('Você realmente quer apagar esse texto?');
 
                                                     if (userConfirm) {
-                                                        try{
-                                                        const pathRef = databaseRef(database, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}`);
-                                                        databaseRemove(pathRef).catch(e => console.log(e));
+                                                        try {
+                                                            const pathRef = databaseRef(database, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}`);
+                                                            databaseRemove(pathRef).catch(e => console.log(e));
 
-                                                        const img_path_ref = storageRef(storage, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}/${k}_img`);
-                                                        await deleteObject(img_path_ref);
+                                                            const img_path_ref = storageRef(storage, `games/burn-book/game-data/${value}/content/${key}/blocks/${k}/${k}_img`);
+                                                            await deleteObject(img_path_ref);
 
-                                                    } catch (e){
+                                                        } catch (e) {
 
-                                                    }
+                                                        }
 
                                                     }
                                                 })
@@ -495,7 +495,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
 
                                         } else {
 
-                                            const blockTextArea = document.getElementById(`block-textArea-${k}`)
+                                            const blockTextArea = document.getElementById(`block-textArea-${key}-${k}`);
                                             blockTextArea.value = vv.text;
 
                                             const existingBlocks = document.querySelectorAll(`.blockTextDiv[id^="block-text-${key}-"]`);
@@ -606,7 +606,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
 
         }
     } else {
-        window.location.replace('rafaavf.github.io/abismo-do-gabs/login.html')
+        window.location.replace('rafaavf.github.io/')
     }
 });
 
