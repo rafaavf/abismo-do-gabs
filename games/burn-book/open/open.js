@@ -439,7 +439,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                 blockImgInput2.type = 'file';
                                                 blockImgInput2.accept = 'image/*';
                                                 blockImgInput2.className = 'blockImgInput2';
-                                                blockImgInput2.id = `blockImg-${k}`;
+                                                blockImgInput2.id = `blockImg-${key}-${k}`;
 
                                                 blockImgInput2.addEventListener('change', async (event) => {
                                                     const file = event.target.files[0];
@@ -514,7 +514,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                 }
                                             });
 
-                                            const blockImgAbc = document.getElementById(`blockImg-${k}`);
+                                            const blockImgAbc = document.getElementById(`blockImg-${key}-${k}`);
                                             if (blockImgAbc) {
                                                 getImagesFromStorageFolder(`games/burn-book/game-data/${value}/content/${key}/blocks/${k}`).then(async (h) => {
                                                     const imageUrl = h[0];
