@@ -215,11 +215,16 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             const blockImgInput = document.createElement('input');
                             blockImgInput.type = 'file';
                             blockImgInput.accept = 'image/*';
-                            blockImgInput.id = 'blockImgInput';
-                            blockImgInput.addEventListener('change', (event) => {
+                            blockImgInput.id = `blockImgInput-${key}`;
+                            console.log(`games/burn-book/game-data/${value}/content/${key}/coverImg/${key}_coverImg`)
+
+                            headingDiv.appendChild(blockImgInput);
+
+                            document.getElementById(`blockImgInput-${key}`).addEventListener('change', (event) => {
                                 const file = event.target.files[0];
                                 if (file && file.type.startsWith('image/')) {
                                     coverImg.src = URL.createObjectURL(file);
+                                    
 
                                     const pathStorageRef = storageRef(storage, `games/burn-book/game-data/${value}/content/${key}/coverImg/${key}_coverImg`);
                                     const uploadTask = uploadBytes(pathStorageRef, file);
@@ -231,15 +236,15 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                     console.log(v.hasCoverImg)
                                 }
                             })
-                            headingDiv.appendChild(blockImgInput);
 
                             const coverImgLabel = document.createElement('label');
-                            coverImgLabel.setAttribute('for', 'blockImgInput');
+                            coverImgLabel.setAttribute('for', `blockImgInput-${key}`);
                             headingDiv.appendChild(coverImgLabel);
 
 
                             const coverImg = document.createElement('img');
                             coverImg.className = 'coverImgBlock';
+                            coverImg.id = `coverImg-${key}`;
                             coverImgLabel.appendChild(coverImg);
 
                             if (v.hasCoverImg) {
@@ -558,7 +563,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             const date = blockDiv.querySelector('.date');
                             date.textContent = v.date;
 
-                            const coverImg = blockDiv.querySelector('.coverImgBlock');
+                            const coverImg = blockDiv.getElementById(`coverImg-${key}`);
 
                             if (v.hasCoverImg) {
                                 getImagesFromStorageFolder(`games/burn-book/game-data/${value}/content/${key}/coverImg`).then(async (h) => {
