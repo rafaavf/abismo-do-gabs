@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-resizing Textarea</title>
+    <style>
+        /* Custom styles for the textarea */
+        .blockTextArea {
+            background-color: transparent; /* Transparent background */
+            border: none;                  /* No border */
+            border-radius: 10px;          /* Rounded corners */
+            min-height: 50px;              /* Minimum height */
+            resize: none;                  /* Disable manual resizing */
+            outline: none;                 /* Remove outline */
+            padding: 10px;                 /* Padding inside the textarea */
+            width: 100%;                   /* Full width */
+            box-sizing: border-box;        /* Include padding and border in the width */
+            font-size: 16px;               /* Optional: set font size */
+        }
+    </style>
+</head>
+<body>
+
+<textarea class="blockTextArea" rows="1" placeholder="Start typing..."></textarea>
+<textarea class="blockTextArea" rows="1" placeholder="Another textarea..."></textarea>
+
+<script>
+    // Function to adjust the height of the textarea
+    function adjustHeight() {
+        this.style.height = 'auto'; // Reset height to auto to calculate new height
+        this.style.height = `${this.scrollHeight}px`; // Set height to scrollHeight
+    }
+
+    // Get all textarea elements with the blockTextArea class
+    const textareas = document.querySelectorAll('.blockTextArea');
+
+    // Loop through each textarea and add the event listener
+    textareas.forEach(textarea => {
+        textarea.addEventListener('input', adjustHeight); // Adjust height on input
+        adjustHeight.call(textarea); // Initial adjustment for each textarea
+    });
+</script>
+
+</body>
+</html>

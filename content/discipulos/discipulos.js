@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getDatabase, ref as databaseRef, onValue } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getDatabase, ref as databaseRef, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
@@ -35,6 +35,9 @@ onAuthStateChanged(auth, (user) => {
 
         onValue(thisUsersDataRef, (snapshot) => {
             const thisUsersData = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
+
+            const container = document.getElementById('content');
+            container.innerHTML = '';
 
             thisUsersData.forEach(async (i) => {
                 if (i.hasAcess) {
@@ -80,7 +83,7 @@ onAuthStateChanged(auth, (user) => {
                     const dateCreatedTransformed = new Date(i.dateCreated);
                     dateCreated.textContent = 'Entrou: ' + dateCreatedTransformed.toLocaleDateString("pt-BR");
 
-                    document.getElementById('content')
+                    container
                         .appendChild(newDiv)
                         .appendChild(usernameDiv)
                         .appendChild(pfpElement);

@@ -1,0 +1,7 @@
+const addImgButton = document.createElement('button');
+                    addImgButton.className = 'addButtons';
+                    const addImgButtonSpan = document.createElement('span');
+                    addImgButtonSpan.className = 'addButtonsSpan';
+                    addImgButtonSpan.textContent = 'Add Imagem';
+                    addImgButton.appendChild(addImgButtonSpan);
+                    buttonDiv.appendChild(addImgButton);

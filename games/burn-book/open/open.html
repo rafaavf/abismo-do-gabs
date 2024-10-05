@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>burn book</title>
+        <link rel="stylesheet" href="open.css" />
+        <link rel="icon" type="image/x-icon" href="../assets/eye.jpg">
+    </head>
+
+    <body>
+
+        <div class = "container">
+            <div id="content" class="content">
+
+            </div>
+        </div>
+
+        <script type="module" src="open.js"></script>
+
+        <script>
+            // Function to adjust height
+            function adjustHeight() {
+                this.style.height = 'auto'; // Reset height to auto to calculate new height
+                this.style.height = `${this.scrollHeight}px`; // Set height to scrollHeight
+            }
+        
+            // Get all textarea elements
+            const textareas = document.getElementsByTagName('textarea');
+            console.log(textareas)
+        
+            // Loop through each textarea and add the event listener
+            for (let i = 0; i < textareas.length; i++) {
+                textareas[i].addEventListener('input', adjustHeight);
+                adjustHeight.call(textareas[i]); // Initial adjustment for each textarea
+            }
+          </script>
+
+    </body>
+</html>
