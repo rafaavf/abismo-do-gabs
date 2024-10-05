@@ -498,6 +498,10 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                             const blockTextArea = document.getElementById(`block-textArea-${key}-${k}`);
                                             blockTextArea.value = vv.text;
 
+                                            setTimeout(async () => {
+                                                adjustHeight.call(blockTextArea);
+                                            }, 100);
+
                                             const existingBlocks = document.querySelectorAll(`.blockTextDiv[id^="block-text-${key}-"]`);
                                             existingBlocks.forEach(existingBlock => {
                                                 const blockId = existingBlock.id.split('-').pop();
