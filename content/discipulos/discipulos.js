@@ -25,7 +25,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const thisUsersDataRef = databaseRef(database, '/users/');
         const userDataRef = databaseRef(database, '/users/' + user.uid);
-        onValue(userDataRef, (snapshot)=>{
+        get(userDataRef, (snapshot)=>{
             const userData = snapshot.val()
             if (!userData.hasAcess){
                 signOut(auth);
@@ -33,7 +33,7 @@ onAuthStateChanged(auth, (user) => {
             }
         })
 
-        onValue(thisUsersDataRef, (snapshot) => {
+        get(thisUsersDataRef).then(snapshot => {
             const thisUsersData = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
 
             const container = document.getElementById('content');
