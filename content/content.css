@@ -1,65 +1,79 @@
-body{
+body {
     background-image: url('assets/images/bg.jpg');
     background-color: black;
 }
-h1{
-    color:white;
+
+h1 {
+    color: white;
 }
-h2{
-    color:white;
+
+h2 {
+    color: white;
 }
 
 @font-face {
     font-family: Pixelify_Sans;
     src: url('assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf');
 }
+
 @font-face {
     font-family: SometypeMono;
     src: url('assets/fonts/Sometype_Mono/SometypeMono-VariableFont_wght.ttf');
-}@font-face {
+}
+
+@font-face {
     font-family: SometypeMonoItalic;
     src: url('assets/fonts/Sometype_Mono/static/SometypeMono-Italic.ttf');
 }
 
-.pixelify-sans-font{
+@font-face {
+    font-family: PixelatedDisplay;
+    src: url('assets/fonts/pixelated_display/PixelatedDisplay.ttf');
+}
+
+.pixelify-sans-font {
     font-family: Pixelify_Sans;
 }
 
-.cabecalho{
+.cabecalho {
     margin-top: -20px;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
     background-color: black;
     height: 100px;
     width: 80vw;
-    border:2px solid white;
+    border: 2px solid white;
     border-bottom-right-radius: 60px;
     border-bottom-left-radius: 60px;
 }
-.cabecalho-title{
+
+.cabecalho-title {
     text-align: center;
-    color:white;
+    color: white;
     font-size: large;
 }
-.cabecalho-links{
+
+.cabecalho-links {
     margin-top: -10px;
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
 }
-.cabecalho-links-text{
-    color:white;
+
+.cabecalho-links-text {
+    color: white;
     font-family: SometypeMono;
 }
 
-.hello{
-    color:white;
+.hello {
+    color: white;
     margin-top: 2vw;
-    margin-left:4vw;
+    margin-left: 4vw;
     font-family: Pixelify_Sans;
 }
-.content{
-    margin-left:auto;
-    margin-right:auto;
+
+.content {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 25px;
     background-color: black;
     width: 80vw;
@@ -68,8 +82,59 @@ h2{
     border-radius: 20px;
 }
 
+.display-games {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
-.temporary{
+.bannerBox{
+    border:2px solid white;
+    border-radius: 10px;
+    width:300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bannerTitle{
+    color: white;
+    font-family: PixelatedDisplay;
+    font-size: 20px;
+}
+
+.bannerDescription{
+    color:white;
+    font-family: SometypeMono;
+    font-size: 14px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.bannerButton{
+    background-color: white;
+    border:2px solid white;
+    padding: 4px 40px;
+    border-radius: 10px;
+    outline-color: transparent;
+    margin-bottom: 10px;
+    font-family: Pixelify_Sans;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.bannerButton:hover{
+    background-color: rgb(136, 136, 136);
+    border:2px solid white;
+    color: white
+}
+
+.bannerImg{
+    height: 150px;
+    margin-top: -20px;
+}
+
+.temporary {
     font-family: SometypeMonoItalic;
     margin-left: 5vw;
 }

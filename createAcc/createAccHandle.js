@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { Timestamp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -26,9 +26,8 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
     const createPassword = await document.getElementById('createPassword').value;
     const currentTimestamp = Timestamp.fromDate(new Date()).toDate().toString();
 
-    const auth = getAuth();
 
-    if (createUsername.length === 0 || title.replace(/\s+/g, '') == '') {
+    if (createUsername.length === 0 || createUsername.replace(/\s+/g, '') == '') {
         alert('Ocorreu um erro: o campo usuário encontra-se nulo')
     } else {
         createUserWithEmailAndPassword(auth, createEmail, createPassword)
@@ -36,19 +35,25 @@ document.getElementById('sendBtn').addEventListener("click", async () => {
                 alert('User registrado com sucesso :) verifique seu email e prossiga para a página de login para continuar!');
 
                 const user = userCredential.user;
-                const uid = user.uid;
 
-                set(ref(database, '/users/' + uid), {
-                    username: createUsername,
-                    email: createEmail,
-                    dateCreated: currentTimestamp,
-                    description: '',
-                    id: uid,
-                    hasAcess: false
-                })
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                      const uid = user.uid;
+                      
+                      // Set user data in the database
+                      set(ref(database, '/users/' + uid), {
+                        username: createUsername,
+                        email: createEmail,
+                        dateCreated: currentTimestamp,
+                        description: '',
+                        id: uid,
+                        hasAccess: false
+                      });
+                    }
+                  });
 
                 sendEmailVerification(user);
-
 
             })
             .catch((error) => {

@@ -10,9 +10,6 @@
 
 <body>
 
-    <script type='module' src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
-    <script type="module" src="content.js"></script>
-
     <div class="cabecalho">
         <div class="cabecalho-title">
             <h1 class='pixelify-sans-font'>abismo do gabs</h1>
@@ -38,15 +35,17 @@
             <h1 id="helloUser"></h1>
         </div>
 
-        <div class="temporary">
+        <!-- <div class="temporary">
             <h2>Em breve teremos jogos aqui!</h2>
-        </div>
+        </div> -->
     
-        <div class="display-games">
-            <div class="display-box">
-            </div>
+        <div class="display-games" id="display-games">
+
         </div>
     </div>
+
+    <script type="module" src="content.js"></script>
+    <script type="module" src="./assets/classes/setUserStatus.js"></script>
 </body>
 
 </html>

@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <script type="module" src="profile.js"></script>
 
     <div class="cabecalho">
         <div class="cabecalho-title">
@@ -40,22 +39,22 @@
                     <h2 style="margin-left:2vw">Foto de perfil:</h2>
 
                     <div class="pfpFlex">
-                        <img class="profilePicture" id="pfp"/>
+                        <img class="profilePicture" id="pfp" />
                         <div>
-                            <label for="file-upload" class="pfpFileInput" >
+                            <label for="file-upload" class="pfpFileInput">
                                 Escolha um arquivo
                             </label>
-                        <input id="file-upload" type="file" accept="image/*"/>
-                            <input type="file" id="imageUpload"/>
+                            <input id="file-upload" type="file" accept="image/*" />
+                            <input type="file" id="imageUpload" />
                             <button class="pfpButton" id="pfpButton">Upload</button>
                         </div>
                     </div>
-                    
-                    
+
+
 
                     <div class="description">
                         <h2 style="margin-left:2vw">Descrição</h2>
-                        
+
                         <textarea class="descriptionBox" id="descriptionBox" aria-multiline="true" cols="31"
                             rows="4"></textarea>
 
@@ -114,6 +113,9 @@
         </div>
     </div>
     </div>
+
+    <script type="module" src="profile.js"></script>
+    <script type="module" src="../assets/classes/setUserStatus.js"></script>
 </body>
 
 </html>
