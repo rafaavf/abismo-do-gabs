@@ -22,6 +22,7 @@ const storage = getStorage(app);
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        returnButton();
 
         const thisUsernameRef = databaseRef(database, '/users/' + user.uid);
         onValue(thisUsernameRef, (snapshot) => {
@@ -183,3 +184,7 @@ onAuthStateChanged(auth, (user) => {
         location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
     }
 });
+
+function returnButton(){
+    document.getElementById('returnButton').addEventListener('click',()=>window.location.replace('../menu/menu.html'));
+}

@@ -6,6 +6,11 @@ html, body {
     background-image: url('../assets/bg.jpg');
   }
 
+  @font-face {
+    font-family: PixelatedDisplay;
+    src: url('../assets/pixelated_display/PixelatedDisplay.ttf');
+  }
+
   canvas {
     display: block;
     border: 2px solid white;
@@ -30,6 +35,24 @@ html, body {
     height: 550px;
     border: 2px solid white;
     border-radius: 20px;
+  }
+
+  .returnButtonDiv{
+    position: relative;
+    top: -540px;
+    left: 10px
+  }
+
+  .returnButton{
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.406);
+    font-size: 17px;
+    font-family: PixelatedDisplay;
+  }
+
+  .returnButton:hover{
+    background-color: rgb(160, 160, 160);
+    color: white
   }
 
   .burnBookDiv{

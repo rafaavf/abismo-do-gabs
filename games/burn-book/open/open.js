@@ -19,14 +19,14 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
-onAuthStateChanged(auth, async (user) => {  // Make the callback function async
+onAuthStateChanged(auth, async (user) => {  
     if (user) {
-        const url = window.location.href;
-        const urlObj = new URL(url);
-        const params = new URLSearchParams(urlObj.search);
-        const value = params.get('id');
+        const value = getUrlVal('id');
 
         if (value == null) {
+
+            returnButton(1);
+
             const container = document.getElementById('content');
             const flexDiv = document.createElement('div');
             flexDiv.className = 'flexDiv';
@@ -34,17 +34,17 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
             container.appendChild(flexDiv);
 
             const userBurnBooksRef = databaseRef(database, 'games/burn-book/user-data/' + user.uid);
-            onValue(userBurnBooksRef, async snapshot => {  // Make the onValue listener async
+            onValue(userBurnBooksRef, async snapshot => {  
                 flexDiv.innerHTML = '';
 
                 const userBurnBooks = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
 
-                for (const p of userBurnBooks) {  // Use a for-loop to await the data
+                for (const p of userBurnBooks) { 
                     for (const i of p) {
                         console.log(i);
 
                         const burnBookRef = databaseRef(database, 'games/burn-book/game-data/' + i);
-                        const d = await get(burnBookRef);  // Await fetching burnBookRef data
+                        const d = await get(burnBookRef);  
                         const burnBookData = d.val();
                         console.log(burnBookData);
 
@@ -68,7 +68,9 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                         bookButton.className = 'bookButton';
                         bookButton.id = 'bookButton';
                         bookButton.addEventListener('click', () => {
-                            window.location.replace('http://127.0.0.1:5500/games/burn-book/open/open.html?id=' + burnBookData.id);
+                            //window.location.replace('http://127.0.0.1:5500/games/burn-book/open/open.html?id=' + burnBookData.id);
+                            window.location.replace('https://rafaavf.git.io/abismo-do-gabs/games/burn-book/open/open.html?id=' + burnBookData.id);
+
                         });
 
                         const bookImg = document.createElement('img');
@@ -95,7 +97,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                         console.log(authorsListId == 0)
 
                         if (authorsListId.length > 0) {
-                            const allUsers = await getUsers();  // Await getUsers
+                            const allUsers = await getUsers(); 
 
                             const allUserData = Object.keys(allUsers).map(key => allUsers[key]);
 
@@ -106,7 +108,6 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             });
                         }
 
-                        // Wait until authorsList is fully populated before proceeding
                         console.log("Authors List: ", authorsList);
 
                         if (authorsList.length > 2) {
@@ -139,6 +140,14 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                 }
             });
         } else {
+
+            returnButton(2)
+
+            const infoButton = document.createElement('button');
+            infoButton.className = "infoButton";
+            infoButton.textContent = "Informações";
+            // document.getElementById("returnButtonDiv").appendChild(infoButton);
+
             const usernameAwait = await get(databaseRef(database, 'users/' + user.uid + '/username'));
 
             const username = Object.keys(usernameAwait).map(key => usernameAwait[key]);
@@ -287,7 +296,7 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             delButtonDiv.appendChild(title);
 
                             const delButton = document.createElement('button');
-                            delButton.className = 'delbutton';
+                            delButton.className = 'delButton';
                             delButton.addEventListener('click', async () => {
                                 const userConfirm = confirm('Você realmente quer apagar esse bloco?');
 
@@ -337,23 +346,23 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                             addTextButton.appendChild(addTextButtonSpan);
                             buttonDiv.appendChild(addTextButton);
 
-                            const addImgButton = document.createElement('button');
-                            addImgButton.className = 'addButtons';
-                            const addImgButtonSpan = document.createElement('span');
-                            addImgButtonSpan.textContent = 'Add Imagem';
-                            addImgButton.appendChild(addImgButtonSpan);
-                            buttonDiv.appendChild(addImgButton);
+                            // const addImgButton = document.createElement('button');
+                            // addImgButton.className = 'addButtons';
+                            // const addImgButtonSpan = document.createElement('span');
+                            // addImgButtonSpan.textContent = 'Add Imagem';
+                            // addImgButton.appendChild(addImgButtonSpan);
+                            // buttonDiv.appendChild(addImgButton);
 
                             addTextButton.addEventListener('click', () => {
                                 addNewText('Insira texto', value, key);
                             });
 
-                            addImgButton.addEventListener('click', () => {
+                            // addImgButton.addEventListener('click', () => {
 
-                                addNewImage(value, key)
-                                console.log('abc')
+                            //     addNewImage(value, key)
+                            //     console.log('abc')
 
-                            })
+                            // })
 
 
                             title.addEventListener('change', async () => {
@@ -540,8 +549,6 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
                                                 })
                                             }
 
-
-
                                         }
 
                                     })
@@ -619,6 +626,14 @@ onAuthStateChanged(auth, async (user) => {  // Make the callback function async
     }
 });
 
+function getUrlVal(x){
+    const url = window.location.href;
+    const urlObj = new URL(url);
+    const params = new URLSearchParams(urlObj.search);
+    const value = params.get(x);
+
+    return value
+}
 
 async function getImagesFromStorageFolder(path) {
     const folderRef = storageRef(storage, path);
@@ -696,6 +711,61 @@ async function addNewImage(id, id2) {
 }
 
 function adjustHeight() {
-    this.style.height = 'auto'; // Reset height to auto to calculate new height
-    this.style.height = `${this.scrollHeight}px`; // Set height to scrollHeight
+    this.style.height = 'auto'; 
+    this.style.height = `${this.scrollHeight}px`; 
+}
+
+function returnButton(type){
+    const returnButton = document.getElementById('returnButton');
+    const returnButtonDiv = document.getElementById('returnButtonDiv');
+
+    if (type == 1){
+        returnButton.addEventListener('click', ()=> window.location.replace('../menu/menu.html')); 
+        returnButtonDiv.className = 'returnButtonDiv1';
+    } else if (type == 2) {
+       returnButton.addEventListener('click', ()=>window.location.replace('open.html'));
+       returnButtonDiv.className = 'returnButtonDiv2'
+    }
+}
+
+async function infoBox(){
+
+    const bookId = getUrlVal('id');
+
+    const infoBoxDiv = document.createElement('div');
+    infoBoxDiv.className = "infoBoxDiv";
+
+    const infoTitle = document.createElement('textarea');
+    infoTitle.className = "infoTitle";
+    infoTitle.addEventListener('input', ()=>{
+        const pathR = databaseRef(database, `games/burn-book/game-data/${bookId}`);
+        update(pathR, {
+            title: infoTitle.value
+        })
+    })
+
+    const infoCoverImgInput = document.createElement('input');
+    infoCoverImgInput.className = "infoCoverImgInput";
+    infoCoverImgInput.id = `infoCoverImgInput-${bookId}`;
+    infoCoverImgInput.addEventListener('change', async(event)=>{
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+
+            const pathStorageRef = storageRef(storage, `/games/burn-book/game-data/${bookId}/cover/${bookId}_cover`);
+            const uploadTask = await uploadBytes(pathStorageRef, file);
+            uploadTask.then((h) => {
+                update(databaseRef(database, `games/burn-book/game-data/${bookId}`), {
+                    hasCoverImg: true
+                }).cath(e => console.log(e))
+            })
+        }
+    })
+
+    const pathR = databaseRef(database, `games/burn-book/game-data/${bookId}`);
+    await onValue(pathR, (snapshot)=>{
+        const snapshotVal = Object.keys(snapshot.val()).map(key => snapshot.val()[key]);
+
+        infoTitle.value = snapshotVal.title;
+    })
+
 }

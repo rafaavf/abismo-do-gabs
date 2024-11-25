@@ -22,6 +22,8 @@ const storage = getStorage(app);
 onAuthStateChanged(auth, (user) => {
     if (user) {
 
+        returnButton();
+
         document.getElementById("buttonCreate").addEventListener('click', ()=>{
             window.location.replace('../create/create.html')
         });        
@@ -34,3 +36,7 @@ onAuthStateChanged(auth, (user) => {
         location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
     }
 });
+
+function returnButton (){
+    document.getElementById("returnButton").addEventListener('click', ()=>window.location.replace('../../../content/content.html'))
+}
