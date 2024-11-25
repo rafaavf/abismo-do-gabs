@@ -69,7 +69,7 @@ onAuthStateChanged(auth, async (user) => {
                         bookButton.id = 'bookButton';
                         bookButton.addEventListener('click', () => {
                             //window.location.replace('http://127.0.0.1:5500/games/burn-book/open/open.html?id=' + burnBookData.id);
-                            window.location.replace('https://rafaavf.git.io/abismo-do-gabs/games/burn-book/open/open.html?id=' + burnBookData.id);
+                            window.location.replace('https://rafaavf.github.io/abismo-do-gabs/games/burn-book/open/open.html?id=' + burnBookData.id);
 
                         });
 
