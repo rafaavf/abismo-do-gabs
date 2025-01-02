@@ -93,7 +93,7 @@ function deleteFile(filePath) {
     deleteObject(fileRef).then(() => {
         console.log('File deleted successfully');
     }).catch((error) => {
-        console.error('Error deleting file:', error);
+        console.error(error.code);
     });
 }
 
@@ -138,7 +138,7 @@ async function updateUserPfp(uid) {
     } else if (!formats.includes(file.type)) {
         alert("Por favor, selecione uma imagem que tenha algum dos seguintes formatos: png, jpeg, jpg")
     } else {
-        await deleteFile(`users/${uid}/pfp/${uid}_pfp`).then(() => {
+        // await deleteFile(`users/${uid}/pfp/${uid}_pfp`).then(() => {
 
             const imageRef = storageRef(storage, `users/${uid}/pfp/${uid}_pfp`);
 
@@ -152,7 +152,11 @@ async function updateUserPfp(uid) {
             }).catch((error) => {
                 alert('Ocorreu o seguinte erro: ' + error);
             });
-        })
+        // }).catch(error =>{
+        //     if (error.message ==  'storage/object-not-found'){
+
+        //     }
+        // })
     }
 }
 
