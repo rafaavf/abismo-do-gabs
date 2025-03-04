@@ -40,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
                         await setPersistence(auth, browserLocalPersistence)
                             .then(() => {
                                 //location.assign('http://127.0.0.1:5500/content/content.html');
-                                window.location.replace('./content/content.html');
+                                window.location.replace('./content/');
                             })
                             .catch((error) => {
                                 alert('Ocorreu um erro: ' + error.message);
