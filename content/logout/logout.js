@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
 
     } else {
 
-    } window.location.assign("https://rafaavf.github.io/abismo-do-gabs/");
+   // } window.location.assign("https://rafaavf.github.io/abismo-do-gabs/");
 });
 
 async function checkAccess(uid) {
