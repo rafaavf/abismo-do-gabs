@@ -25,7 +25,7 @@ onAuthStateChanged(auth, (user) => {
 
         document.getElementById('logoutBtn').addEventListener('click', ()=>{
             signOut(auth).then(() => {
-                window.location.replace('../login.html');
+                window.location.replace('../../');
                 //location.assign('http://127.0.0.1:5500/login.html')
             }).catch((error) => {
                 alert('Ocorreu um erro: ', error.message);
@@ -43,7 +43,7 @@ async function checkAccess(uid) {
 
         if (e.message == "Permission denied") {
             alert('Você não têm permissão para acessar a plataforma. Contate a proprietária para requisitar acesso');
-            await signOut(auth).then(() => window.location.replace('../../login.html'));
+            await signOut(auth).then(() => window.location.replace('../../'));
         }
     });
 }
