@@ -83,7 +83,7 @@ async function checkAccess(uid) {
 
         if (e.message == "Permission denied") {
             alert('Você não têm permissão para acessar a plataforma. Contate a proprietária para requisitar acesso');
-            await signOut(auth).then(() => window.location.replace('../login.html'));
+            await signOut(auth).then(() => window.location.replace('../../'));
         }
     });
 }
