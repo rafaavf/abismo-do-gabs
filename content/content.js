@@ -71,7 +71,7 @@ onAuthStateChanged(auth, (user) => {
 
         const activityTracker = new SetUserStatus(user);
     } else {
-        location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+        location.assign('https://rafaavf.github.io/abismo-do-gabs/');
     }
 });
 
