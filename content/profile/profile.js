@@ -69,7 +69,7 @@ onAuthStateChanged(auth, (user) => {
 
 
     } else {
-        location.assign('https://rafaavf.github.io/abismo-do-gabs/login.html');
+        location.assign('https://rafaavf.github.io/abismo-do-gabs/');
     }
 });
 
